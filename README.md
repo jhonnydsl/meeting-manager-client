@@ -1,27 +1,44 @@
-# MeetingManager
+# Meeting Manager - Welcome Component
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.9.
+This project is a web application for managing meetings in real-time.  
+The current focus is on the **Welcome component**, which includes a styled hero section with title, description, background image, and interactive buttons.
 
-## Development server
+> ⚠️ **Note:** This project is under active development. Features and UI may change.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Features (so far)
 
-## Code scaffolding
+- Responsive Welcome screen
+- Animated gradient title
+- Paragraph with custom styling
+- Buttons with hover and click effects
+- Background image with blur effect
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Tech Stack
 
-## Build
+- Angular (frontend)
+- HTML / CSS / TypeScript
+- Responsive design (mobile and desktop)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Screenshots
 
-## Running unit tests
+![Welcome Screen](./assets/welcome-screenshot.png)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## How to Run
 
-## Running end-to-end tests
+1. Clone the repository:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+git clone https://github.com/your-username/meeting-manager.git
+```
 
-## Further help
+2. Install dependencies:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+npm install
+```
+
+3. Run the development server:
+
+```bash
+ng server or npm run start
+```
