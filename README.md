@@ -1,4 +1,4 @@
-# Meeting Manager - Welcome Component
+# Meeting Manager - App crating with Angular
 
 This project is a web application for managing meetings in real-time.  
 The current focus is on the **Welcome component**, which includes a styled hero section with title, description, background image, and interactive buttons.
@@ -9,7 +9,6 @@ The current focus is on the **Welcome component**, which includes a styled hero 
 
 - Responsive Welcome screen
 - Animated gradient title
-- Paragraph with custom styling
 - Buttons with hover and click effects
 - Background image with blur effect
 
