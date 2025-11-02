@@ -71,11 +71,13 @@ html {
 
 .welcome-box p {
   font-size: clamp(1rem, 4vw, 2rem);
-  color: #2e2e2e;
+  background: linear-gradient(90deg, #4c6baf, #01021f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   line-height: 1.6;
   margin-bottom: 2rem;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
-  font-weight: 400;
+  font-weight: 1000;
 }
 
 .actions {
@@ -109,7 +111,7 @@ html {
 }
 
 .actions button:last-child {
-  background-color: #1dabf1;
+  background-color: #154bf1;
   color: white;
 }
 
@@ -124,19 +126,70 @@ html {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
 
-@media (max-width: 600px) {
-  .welcome-container h1 {
-    font-size: 3rem;
+.welcome-footer {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #444;
+  opacity: 0.85;
+}
+
+.welcome-footer a {
+  color: #0077b5;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.welcome-footer a:hover {
+  color: #005582;
+  text-decoration: underline;
+  transform: scale(1.05);
+}
+
+.welcome-footer i {
+  margin-right: 5px;
+}
+
+@media (max-width: 1366px) {
+  .welcome-box {
+    padding: 50px 30px;
+    max-width: 500px;
   }
 
-  .welcome-container p {
-    font-size: 1.5rem;
+  .welcome-box h1 {
+    font-size: clamp(1.8rem, 6vw, 3.5rem);
+  }
+
+  .welcome-box p {
+    font-size: clamp(0.9rem, 3vw, 1.8rem);
+  }
+
+  .actions button {
+    font-size: clamp(0.5rem, 3vw, 1rem);
+  }
+}
+
+@media (max-width: 700px) {
+  .welcome-box {
+    padding: 40px 20px;
+    max-width: 90%;
+  }
+
+  .welcome-box h1 {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+  }
+
+  .welcome-box p {
+    font-size: clamp(0.8rem, 4vw, 1.5rem);
   }
 
   .actions button {
     flex: 1 1 100%;
     max-width: none;
     font-size: 1.3rem;
-    padding: 12px 0;
+    padding: 10px 0;
   }
 }
