@@ -1,11 +1,107 @@
 <div class="register-container">
   <div class="register-box">
     <h2>Cadastre-se</h2>
-    <form>
-      <input type="text" placeholder="Nome" />
-      <input type="email" placeholder="Email" />
-      <input type="password" placeholder="Senha" />
-      <input type="password" placeholder="Confirme sua senha" />
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="input-container">
+        <input
+          type="text"
+          placeholder="Nome"
+          formControlName="name"
+          [class.invalid]="
+            registerForm.get('name')?.invalid &&
+            registerForm.get('name')?.touched
+          "
+        />
+        <div
+          class="error"
+          *ngIf="
+            registerForm.get('name')?.touched &&
+            registerForm.get('name')?.errors
+          "
+        >
+          <small *ngIf="registerForm.get('name')?.errors?.['required']">
+            Nome é obrigatório
+          </small>
+        </div>
+      </div>
+
+      <div class="input-container">
+        <input
+          type="email"
+          placeholder="Email"
+          formControlName="email"
+          [class.invalid]="
+            registerForm.get('email')?.invalid &&
+            registerForm.get('email')?.touched
+          "
+        />
+        <div
+          class="error"
+          *ngIf="
+            registerForm.get('email')?.touched &&
+            registerForm.get('email')?.errors
+          "
+        >
+          <small *ngIf="registerForm.get('email')?.errors?.['required']">
+            Email é obrigatório
+          </small>
+          <small *ngIf="registerForm.get('email')?.errors?.['email']">
+            Email inválido
+          </small>
+        </div>
+      </div>
+
+      <div class="input-container">
+        <input
+          type="password"
+          placeholder="Senha"
+          formControlName="password"
+          [class.invalid]="
+            registerForm.get('password')?.invalid &&
+            registerForm.get('password')?.touched
+          "
+        />
+        <div
+          class="error"
+          *ngIf="
+            registerForm.get('password')?.touched &&
+            registerForm.get('password')?.errors
+          "
+        >
+          <small *ngIf="registerForm.get('password')?.errors?.['required']">
+            Senha é obrigatória
+          </small>
+          <small *ngIf="registerForm.get('password')?.errors?.['minlength']">
+            Senha precisa ter no minimo 6 caracteres
+          </small>
+        </div>
+      </div>
+
+      <div class="input-container">
+        <input
+          type="password"
+          placeholder="Confirme sua senha"
+          formControlName="confirmPassword"
+          [class.invalid]="
+        (registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched) ||
+        (registerForm.errors?.['passwordsMismatch'] && registerForm.get('confirmPassword')?.touched)
+        "
+        />
+        <div
+          class="error"
+          *ngIf="registerForm.get('confirmPassword')?.touched && (registerForm.get('confirmPassword')?.errors || registerForm.errors?.['passwordsMismatch'])"
+        >
+          <small
+            *ngIf="registerForm.get('confirmPassword')?.errors?.['required']"
+          >
+            Confirmação de senha é obrigatória.
+          </small>
+          <small *ngIf="registerForm.errors?.['passwordsMismatch']">
+            As senhas não coincidem.
+          </small>
+        </div>
+      </div>
+
       <button type="submit">Criar conta</button>
     </form>
     <p class="login-link">
