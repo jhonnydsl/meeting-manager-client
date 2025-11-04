@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,11 @@ import { RouterLink } from '@angular/router';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -24,6 +29,18 @@ export class LoginComponent {
       return;
     }
 
-    console.log('Login válido:', this.loginForm.value);
+    const { email, password } = this.loginForm.value;
+
+    this.authService.login(email!, password!).subscribe({
+      next: (res) => {
+        localStorage.setItem('token', res.token);
+        alert('Login realizado com sucesso!');
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        console.error(err);
+        alert('credenciais inválidas');
+      },
+    });
   }
 }

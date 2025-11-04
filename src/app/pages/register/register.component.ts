@@ -7,7 +7,8 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,11 @@ import { RouterLink } from '@angular/router';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   registerForm = this.fb.group(
     {
@@ -41,6 +46,17 @@ export class RegisterComponent {
       return;
     }
 
-    console.log('Register válido:', this.registerForm.value);
+    const { name, email, password } = this.registerForm.value;
+
+    this.authService.register({ name, email, password } as any).subscribe({
+      next: () => {
+        alert('Usuario cadastrado com sucesso!');
+        this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        console.log(err);
+        alert('Erro ao cadastrar usuário');
+      },
+    });
   }
 }
