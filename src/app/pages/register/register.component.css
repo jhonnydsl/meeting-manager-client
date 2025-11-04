@@ -1,11 +1,25 @@
+html,
 body {
-  background-color: #154bf1;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .register-container {
   display: flex;
-  height: 100vh;
+  flex: 1;
   position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1c3d6e, #28509d);
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.2);
 }
 
 .register-box {
@@ -25,6 +39,8 @@ body {
   margin-top: 5px;
   margin-bottom: 5px;
   gap: 1.5rem;
+  height: auto;
+  max-height: 85vh;
 }
 
 .register-box h2 {
@@ -34,7 +50,7 @@ body {
 
 .register-box input {
   width: 100%;
-  padding: 20px;
+  padding: 15px;
   margin-bottom: 0;
   font-size: 1rem;
   border-radius: 6px;
@@ -83,8 +99,6 @@ body {
   align-items: center;
   z-index: 1;
   display: flex;
-  background: linear-gradient(135deg, #1c3d6e, #28509d);
-  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.2);
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
@@ -158,6 +172,7 @@ input.invalid {
   flex-direction: column;
   width: 95%;
   gap: 0.25rem;
+  min-height: 70px;
 }
 
 @media (max-width: 1366px) {
@@ -191,6 +206,35 @@ input.invalid {
     margin-bottom: 1rem;
     object-fit: contain;
     border-radius: 20px;
+  }
+}
+
+@media (max-width: 1100px) and (min-width: 701px) {
+  .register-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .register-box {
+    width: 80%;
+    max-width: 500px;
+    margin: 1rem auto;
+  }
+
+  .register-right {
+    position: static;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    padding: 1rem;
+    text-align: center;
+    align-items: center;
+  }
+
+  .login-img {
+    max-width: 400px;
   }
 }
 
