@@ -1,0 +1,146 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(135deg, #0a0f1f, #1a2238);
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+.menu-btn {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: #00b4d8;
+  cursor: pointer;
+  margin-right: 1rem;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.menu-btn:hover {
+  color: #0096c7;
+  transform: scale(1.1);
+}
+
+.navbar h1 {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+/* LAYOUT PRINCIPAL */
+.content {
+  flex: 1;
+  padding: 2rem;
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+  overflow-y: auto;
+}
+
+.content.shift {
+  margin-left: 240px;
+}
+
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100%;
+  background: rgba(20, 25, 45, 0.98);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  padding-top: 80px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin: 1rem 0;
+}
+
+.sidebar a {
+  color: #ddd;
+  text-decoration: none;
+  padding: 0.8rem 1.5rem;
+  display: block;
+  transition: background 0.2s, color 0.2s;
+}
+
+.sidebar a:hover {
+  background: #00b4d8;
+  color: #fff;
+  border-radius: 0 20px 20px 0;
+}
+
+/* CONTEÚDO DAS REUNIÕES */
+.content h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: #00b4d8;
+}
+
+.meeting-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.meeting-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.meeting-card:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.meeting-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: #fff;
+}
+
+.meeting-card p {
+  margin: 0.2rem 0;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .content.shift {
+    margin-left: 0;
+  }
+
+  .sidebar {
+    width: 200px;
+  }
+
+  .navbar h1 {
+    font-size: 1.1rem;
+  }
+}

@@ -1,0 +1,34 @@
+<div class="home-container">
+  <header class="navbar">
+    <button class="menu-btn" (click)="toggleSidebar()">&#9776;</button>
+    <h1>Meeting Manager</h1>
+  </header>
+
+  <aside class="sidebar" [class.open]="sidebarOpen">
+    <ul>
+      <li><a href="#">Reuniões</a></li>
+      <li><a href="#">Convites</a></li>
+      <li><a href="#">Amigos</a></li>
+      <li><a href="#">Solicitações de amizade</a></li>
+      <li><a href="#">Sair</a></li>
+    </ul>
+  </aside>
+
+  <main class="content" [class.shift]="sidebarOpen">
+    <h2>Minhas Reuniões</h2>
+
+    <div class="meeting-list">
+      <ng-container *ngIf="meetings.length > 0; else noMeetings">
+        <div *ngFor="let meeting of meetings" class="meeting-card">
+          <h3>{{ meeting.title }}</h3>
+          <p>{{ meeting.date | date : "short" }}</p>
+          <p>{{ meeting.description }}</p>
+        </div>
+      </ng-container>
+
+      <ng-template #noMeetings>
+        <p>Nenhuma reunião criada ainda.</p>
+      </ng-template>
+    </div>
+  </main>
+</div>
