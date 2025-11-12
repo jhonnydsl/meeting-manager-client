@@ -19,10 +19,18 @@
 
     <div class="meeting-list">
       <ng-container *ngIf="meetings.length > 0; else noMeetings">
-        <div *ngFor="let meeting of meetings" class="meeting-card">
-          <h3>{{ meeting.title }}</h3>
-          <p>{{ meeting.date | date : "short" }}</p>
-          <p>{{ meeting.description }}</p>
+        <div *ngFor="let meeting of meetings" class="meeting-item">
+          <div>
+            <h3>{{ meeting.title }}</h3>
+            <p>{{ meeting.date | date : "short" }}</p>
+            <p>{{ meeting.description }}</p>
+          </div>
+
+          <div class="meeting-actions">
+            <button class="button start">Iniciar</button>
+            <button class="button edit">Editar</button>
+            <button class="button delete">Excluir</button>
+          </div>
         </div>
       </ng-container>
 

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class MeetingsService {
-  private apiUrl = 'http://localhost:8080/meetings';
+  private apiUrl = 'https://meeting-manager-xzk7.onrender.com';
 
   constructor(private http: HttpClient) {}
 
