@@ -1,181 +1,123 @@
-/* ===== Layout geral ===== */
-.home-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: #f4f6f8;
+:root {
+  --sidebar-w: 260px;
 }
 
-/* ===== Navbar ===== */
+/* Navbar */
 .navbar {
-  background-color: #007bff;
-  color: #fff;
-  padding: 15px 20px;
   display: flex;
   align-items: center;
-}
-
-.navbar h1 {
-  flex: 1;
-  text-align: center;
-  font-size: 20px;
-  margin: 0;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #fff;
+  border-bottom: 1px solid #e6e6e6;
 }
 
 .menu-btn {
-  font-size: 22px;
+  font-size: 20px;
   background: none;
   border: none;
-  color: #fff;
   cursor: pointer;
-  position: relative;
-  z-index: 1100;
 }
 
-/* ===== Sidebar ===== */
+.app-title {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+/* Sidebar */
 .sidebar {
   position: fixed;
+  left: -var(--sidebar-w);
   top: 0;
-  left: 0;
-  width: 240px;
-  height: 100%;
-  background: rgba(20, 25, 45, 0.98);
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-  padding-top: 80px;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.4);
-  z-index: 1000;
+  bottom: 0;
+  width: var(--sidebar-w);
+  background: #fafafa;
+  padding: 20px;
+  transition: left 0.25s ease;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.06);
+  z-index: 10;
 }
-
 .sidebar.open {
-  transform: translateX(0);
+  left: 0;
 }
 
 .sidebar ul {
   list-style: none;
   padding: 0;
+  margin: 0;
+}
+.sidebar li {
+  margin-bottom: 12px;
 }
 
-.sidebar ul li {
-  padding: 15px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.sidebar ul li a {
-  color: #fff;
-  text-decoration: none;
-  display: block;
-  font-size: 15px;
-}
-
-/* ===== Conteúdo principal ===== */
+/* Content */
 .content {
-  flex: 1;
   margin-left: 0;
-  padding: 30px;
-  transition: margin-left 0.3s ease;
-  min-height: calc(100vh - 60px); /* garante ocupação total abaixo do navbar */
-  display: flex;
-  flex-direction: column;
-}
-
-.content.shift {
-  margin-left: 220px;
-}
-
-/* ===== Dashboard ===== */
-.dashboard {
-  flex: 1; /* ocupa todo o espaço disponível */
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  border-radius: 8px;
   padding: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  overflow-y: auto; /* adiciona scroll se tiver muitas reuniões */
+  transition: margin-left 0.25s ease;
+}
+.content.shift {
+  margin-left: var(--sidebar-w);
 }
 
-/* ===== Título ===== */
-.dashboard h2 {
-  font-size: 24px;
-  color: #007bff;
-  margin-bottom: 20px;
-}
-
-/* ===== Lista de reuniões ===== */
-.meeting-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-/* ===== Cartão ===== */
-.meeting-card {
+.content-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
-  border: 1px solid #007bff;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  margin-bottom: 12px;
 }
 
-.meeting-card h3 {
-  color: #333;
-  font-size: 18px;
-  margin-bottom: 8px;
+/* Meetings */
+.meeting-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.meeting-card p {
+.meeting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid #eee;
+}
+
+.meeting-info h3 {
+  margin: 0 0 6px 0;
+}
+.meeting-info .meta {
+  margin: 0 0 8px 0;
   color: #666;
-  margin: 3px 0;
-  font-size: 14px;
+  font-size: 0.9rem;
+}
+.meeting-info .desc {
+  margin: 0;
+  color: #333;
 }
 
-/* ===== Ações ===== */
 .meeting-actions {
   display: flex;
-  gap: 10px;
+  gap: 8px;
+  align-items: center;
 }
 
-.button {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 6px;
-  color: #fff;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: background 0.2s, transform 0.2s;
+.loading,
+.empty {
+  padding: 24px;
+  text-align: center;
+  color: #666;
 }
 
-.button.edit {
-  background-color: #007bff;
+/* start dialog */
+.start-dialog {
+  padding: 16px;
+  width: 100%;
 }
-
-.button.delete {
-  background-color: #dc3545;
-}
-
-.button.start {
-  background-color: #28a745;
-}
-
-.button:hover {
-  transform: scale(1.05);
-}
-
-/* ===== Responsividade ===== */
-@media (max-width: 768px) {
-  .meeting-card {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .meeting-actions {
-    margin-top: 10px;
-  }
-
-  .content.shift {
-    margin-left: 0;
-  }
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
 }

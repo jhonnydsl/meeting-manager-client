@@ -1,0 +1,13 @@
+<div class="confirm-container">
+  <h2>Excluir reunião</h2>
+
+  <p>
+    Tem certeza que deseja excluir a reunião <strong>{{ data.title }}</strong
+    >?
+  </p>
+
+  <div class="buttons">
+    <button mat-button (click)="cancel()">Cancelar</button>
+    <button mat-button color="warn" (click)="confirm()">Excluir</button>
+  </div>
+</div>

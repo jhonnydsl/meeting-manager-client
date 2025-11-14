@@ -1,42 +1,98 @@
-<div class="home-container">
-  <header class="navbar">
-    <button class="menu-btn" (click)="toggleSidebar()">&#9776;</button>
-    <h1>Meeting Manager</h1>
+<nav class="navbar" role="navigation" aria-label="Barra principal">
+  <button
+    class="menu-btn"
+    type="button"
+    (click)="toggleSidebar()"
+    [attr.aria-expanded]="sidebarOpen"
+    aria-controls="main-sidebar"
+    title="Abrir menu"
+  >
+    &#9776;
+  </button>
+
+  <h1 class="app-title">Meeting Manager</h1>
+
+  <div class="actions-right">
+    <button mat-raised-button color="primary" (click)="openCreateMeeting()">
+      + Nova reunião
+    </button>
+  </div>
+</nav>
+
+<aside
+  id="main-sidebar"
+  class="sidebar"
+  [class.open]="sidebarOpen"
+  role="complementary"
+>
+  <ul>
+    <li><a routerLink="/meetings">Reuniões</a></li>
+    <li><a routerLink="/invitations">Convites</a></li>
+    <li><a routerLink="/friends">Amigos</a></li>
+    <li><a routerLink="/requests">Solicitações de amizade</a></li>
+    <li><button mat-button (click)="onLogout()">Sair</button></li>
+  </ul>
+</aside>
+
+<main class="content" [class.shift]="sidebarOpen" role="main">
+  <header class="content-header">
+    <h2>Minhas Reuniões</h2>
   </header>
 
-  <aside class="sidebar" [class.open]="sidebarOpen">
-    <ul>
-      <li><a href="#">Reuniões</a></li>
-      <li><a href="#">Convites</a></li>
-      <li><a href="#">Amigos</a></li>
-      <li><a href="#">Solicitações de amizade</a></li>
-      <li><a href="#">Sair</a></li>
-    </ul>
-  </aside>
+  <section class="meeting-list" aria-live="polite">
+    <div *ngIf="loading" class="loading">Carregando...</div>
 
-  <main class="content" [class.shift]="sidebarOpen">
-    <h2>Minhas Reuniões</h2>
-
-    <div class="meeting-list">
-      <ng-container *ngIf="meetings.length > 0; else noMeetings">
-        <div *ngFor="let meeting of meetings" class="meeting-item">
-          <div>
-            <h3>{{ meeting.title }}</h3>
-            <p>{{ meeting.date | date : "short" }}</p>
-            <p>{{ meeting.description }}</p>
-          </div>
-
-          <div class="meeting-actions">
-            <button class="button start">Iniciar</button>
-            <button class="button edit">Editar</button>
-            <button class="button delete">Excluir</button>
-          </div>
-        </div>
-      </ng-container>
-
-      <ng-template #noMeetings>
-        <p>Nenhuma reunião criada ainda.</p>
-      </ng-template>
+    <div *ngIf="!loading && meetings?.length === 0" class="empty">
+      Nenhuma reunião criada ainda.
     </div>
-  </main>
-</div>
+
+    <div *ngIf="!loading">
+      <div
+        *ngFor="let meeting of meetings; trackBy: trackByMeeting"
+        class="meeting-item mat-elevation-z1"
+      >
+        <div class="meeting-info">
+          <h3>{{ meeting.title }}</h3>
+          <p class="meta">
+            {{ meeting.startDate | date : "short" }} —
+            {{ meeting.endDate | date : "short" }}
+          </p>
+          <p class="desc">{{ meeting.description }}</p>
+        </div>
+
+        <div class="meeting-actions">
+          <button
+            mat-icon-button
+            aria-label="Iniciar"
+            (click)="startMeeting(meeting)"
+          >
+            <mat-icon>play_arrow</mat-icon>
+          </button>
+
+          <button mat-button (click)="openEditMeeting(meeting)">
+            <mat-icon>edit</mat-icon>
+            Editar
+          </button>
+
+          <button mat-button color="warn" (click)="openDeleteDialog(meeting)">
+            <mat-icon>delete</mat-icon>
+            Excluir
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<ng-template #startDialog let-data>
+  <div class="start-dialog">
+    <h3>Entrar na reunião</h3>
+    <p>Funcionalidade de entrada (WebRTC) será implementada aqui.</p>
+    <p>
+      <strong>{{ data?.meeting?.title }}</strong>
+    </p>
+    <div class="dialog-actions">
+      <button mat-button mat-dialog-close>Fechar</button>
+    </div>
+  </div>
+</ng-template>

@@ -13,7 +13,7 @@ interface RegisterDto {
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = 'https://meeting-manager-xzk7.onrender.com/api/v1';
 
   constructor(private http: HttpClient) {}
 

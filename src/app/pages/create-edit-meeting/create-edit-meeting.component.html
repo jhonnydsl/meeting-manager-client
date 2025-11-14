@@ -1,0 +1,30 @@
+<div class="modal-container">
+  <h2>{{ isEditMode ? "Editar Reunião" : "Criar Reunião" }}</h2>
+
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" class="field">
+      <mat-label>Título</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="field">
+      <mat-label>Descrição</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="field">
+      <mat-label>Data de início</mat-label>
+      <input matInput type="datetime-local" formControlName="startDate" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="field">
+      <mat-label>Data de término</mat-label>
+      <input matInput type="datetime-local" formControlName="endDate" />
+    </mat-form-field>
+  </form>
+
+  <div class="actions">
+    <button mat-button (click)="cancel()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="save()">Salvar</button>
+  </div>
+</div>
