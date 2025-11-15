@@ -68,12 +68,21 @@ export class HomeComponent {
 
     ref.afterClosed().subscribe((result) => {
       if (result) {
+        const pad = (n: number) => n.toString().padStart(2, '0');
+        const formatDateBR = (dateStr: string) => {
+          const d = new Date(dateStr);
+          return `${pad(d.getDate())}/${pad(
+            d.getMonth() + 1
+          )}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+        };
+
         const payload = {
           title: result.title,
           description: result.description,
-          start_time: result.startDate,
-          end_time: result.endDate,
+          start_time: formatDateBR(result.startDate),
+          end_time: formatDateBR(result.endDate),
         };
+
         this.meetingService.createMeeting(payload).subscribe({
           next: () => this.loadMeetings(),
           error: (err) => {
@@ -89,12 +98,38 @@ export class HomeComponent {
     const ref = this.dialog.open(CreateEditMeetingComponent, {
       width: '520px',
       data: {
-        // passe os campos que seu modal espera
         title: meeting.title,
         description: meeting.description,
         startDate: meeting.startDate,
         endDate: meeting.endDate,
       },
+    });
+
+    ref.afterClosed().subscribe((result) => {
+      if (result) {
+        const pad = (n: number) => n.toString().padStart(2, '0');
+        const formatDateBR = (dateStr: string) => {
+          const d = new Date(dateStr);
+          return `${pad(d.getDate())}/${pad(
+            d.getMonth() + 1
+          )}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+        };
+
+        const payload = {
+          title: result.title,
+          description: result.description,
+          start_time: formatDateBR(result.startDate),
+          end_time: formatDateBR(result.endDate),
+        };
+
+        this.meetingService.updateMeeting(meeting.id, payload).subscribe({
+          next: () => this.loadMeetings(),
+          error: (err) => {
+            console.error('Erro ao atualizar reunião:', err);
+            alert('Erro ao atualizar reunião. Veja o console.');
+          },
+        });
+      }
     });
   }
 

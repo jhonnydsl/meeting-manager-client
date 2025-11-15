@@ -12,9 +12,18 @@
 
   <h1 class="app-title">Meeting Manager</h1>
 
-  <div class="actions-right">
-    <button mat-raised-button color="primary" (click)="openCreateMeeting()">
-      + Nova reunião
+  <div class="navbar-actions">
+    <div class="user-info">
+      <mat-icon>account_circle</mat-icon>
+      <span class="username">Jhonny</span>
+    </div>
+    <button
+      mat-icon-button
+      color="warn"
+      aria-label="Logout"
+      (click)="onLogout()"
+    >
+      <mat-icon>power_settings_new</mat-icon>
     </button>
   </div>
 </nav>
@@ -30,13 +39,15 @@
     <li><a routerLink="/invitations">Convites</a></li>
     <li><a routerLink="/friends">Amigos</a></li>
     <li><a routerLink="/requests">Solicitações de amizade</a></li>
-    <li><button mat-button (click)="onLogout()">Sair</button></li>
   </ul>
 </aside>
 
 <main class="content" [class.shift]="sidebarOpen" role="main">
   <header class="content-header">
     <h2>Minhas Reuniões</h2>
+    <button mat-raised-button class="btn-blue" (click)="openCreateMeeting()">
+      + Nova reunião
+    </button>
   </header>
 
   <section class="meeting-list" aria-live="polite">
@@ -69,7 +80,7 @@
             <mat-icon>play_arrow</mat-icon>
           </button>
 
-          <button mat-button (click)="openEditMeeting(meeting)">
+          <button mat-button color="primary" (click)="openEditMeeting(meeting)">
             <mat-icon>edit</mat-icon>
             Editar
           </button>
