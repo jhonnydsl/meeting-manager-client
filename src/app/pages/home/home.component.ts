@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { MeetingsService } from '../../services/meetings/meetings.service';
+import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -29,15 +31,18 @@ export class HomeComponent {
   sidebarOpen = false;
   meetings: any[] = [];
   loading = false;
+  username: string = '';
 
   @ViewChild('startDialog') startDialogTpl!: TemplateRef<any>;
 
   constructor(
     private meetingService: MeetingsService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit() {
+    this.loadUsers();
     this.loadMeetings();
   }
 
@@ -45,11 +50,27 @@ export class HomeComponent {
     this.sidebarOpen = !this.sidebarOpen;
   }
 
+  loadUsers() {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      const decoded: any = jwtDecode(token);
+
+      this.username = decoded.name || decoded.username;
+    }
+  }
+
   loadMeetings() {
     this.loading = true;
     this.meetingService.getMeetings().subscribe({
       next: (res) => {
-        this.meetings = Array.isArray(res) ? res : [];
+        this.meetings = Array.isArray(res)
+          ? res.map((m) => ({
+              ...m,
+              startDate: m.start_time ? new Date(m.start_time) : null,
+              endDate: m.end_time ? new Date(m.end_time) : null,
+            }))
+          : [];
         this.loading = false;
       },
       error: (err) => {
@@ -153,7 +174,8 @@ export class HomeComponent {
   }
 
   onLogout() {
-    console.log('logout');
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 
   startMeeting(meeting: any) {

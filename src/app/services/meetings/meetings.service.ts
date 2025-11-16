@@ -36,7 +36,7 @@ export class MeetingsService {
   }
 
   deleteMeeting(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`, {
+    return this.http.delete(`${this.apiUrl}/delete/${id}`, {
       headers: this.getAuthHeaders(),
     });
   }
