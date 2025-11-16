@@ -30,7 +30,7 @@ export class MeetingsService {
   }
 
   updateMeeting(id: string, data: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, data, {
+    return this.http.put(`${this.apiUrl}/update/${id}`, data, {
       headers: this.getAuthHeaders(),
     });
   }
