@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { MeetingsService } from '../../services/meetings/meetings.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -17,6 +17,7 @@ import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.compone
   standalone: true,
   imports: [
     CommonModule,
+    RouterModule,
     MatDialogModule,
     MatButtonModule,
     MatIconModule,

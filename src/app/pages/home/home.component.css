@@ -66,14 +66,14 @@
 
 .sidebar {
   position: fixed;
-  top: 56px; /* abaixo do navbar */
-  left: -260px; /* escondido inicialmente */
+  top: 56px;
+  left: -260px;
   width: 260px;
   bottom: 0;
   background: #fafafa;
   padding: 20px;
   transition: left 0.25s ease;
-  z-index: 15;
+  z-index: 9999;
 }
 
 .sidebar.open {
@@ -94,6 +94,8 @@
   margin-left: 0;
   padding: 20px 20px 20px 50px;
   transition: margin-left 0.25s ease;
+  position: relative;
+  z-index: 1;
 }
 .content.shift {
   margin-left: 260px !important;
@@ -165,6 +167,19 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 12px;
+}
+
+.cdk-overlay-container {
+  pointer-events: none !important;
+}
+
+.cdk-overlay-container * {
+  pointer-events: auto !important;
+}
+
+.sidebar,
+.sidebar * {
+  pointer-events: auto !important;
 }
 
 @media (max-width: 768px) {
