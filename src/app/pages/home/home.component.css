@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
-  background: #fff;
+  background: #fafafa;
   border-bottom: 1px solid #e6e6e6;
   position: fixed;
   top: 0;
@@ -87,6 +87,21 @@
 }
 .sidebar li {
   margin-bottom: 12px;
+}
+
+.sidebar ul li a {
+  display: block;
+  padding: 12px 16px;
+  border-radius: 6px;
+  color: #0b457f;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar ul li a:hover {
+  background: #e8f1fb;
 }
 
 .content {
