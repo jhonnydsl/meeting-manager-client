@@ -63,15 +63,24 @@ export class HomeComponent {
 
   loadMeetings() {
     this.loading = true;
+
+    const formatIsoToBR = (value: string) => {
+      const [datePart, timePart] = value.split('T');
+      const [year, month, day] = datePart.split('-');
+      const [hour, minute] = timePart.split(':');
+      return `${day}/${month}/${year} ${hour}:${minute}`;
+    };
+
     this.meetingService.getMeetings().subscribe({
       next: (res) => {
         this.meetings = Array.isArray(res)
           ? res.map((m) => ({
               ...m,
-              startDate: m.start_time ? new Date(m.start_time) : null,
-              endDate: m.end_time ? new Date(m.end_time) : null,
+              startDate: formatIsoToBR(m.start_time),
+              endDate: formatIsoToBR(m.end_time),
             }))
           : [];
+
         this.loading = false;
       },
       error: (err) => {
@@ -91,11 +100,10 @@ export class HomeComponent {
     ref.afterClosed().subscribe((result) => {
       if (result) {
         const pad = (n: number) => n.toString().padStart(2, '0');
-        const formatDateBR = (dateStr: string) => {
-          const d = new Date(dateStr);
-          return `${pad(d.getDate())}/${pad(
-            d.getMonth() + 1
-          )}/${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+        const formatDateBR = (value: string) => {
+          const [datePart, timePart] = value.split('T');
+          const [year, month, day] = datePart.split('-');
+          return `${day}/${month}/${year} ${timePart}`;
         };
 
         const payload = {

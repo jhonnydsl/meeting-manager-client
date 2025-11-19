@@ -41,18 +41,31 @@ export class CreateEditMeetingComponent {
   ) {
     this.isEditMode = !!data;
 
+    const brToIso = (value: string) => {
+      if (!value) return '';
+      const [date, time] = value.split(' ');
+      const [day, month, year] = date.split('/');
+      return `${year}-${month}-${day}T${time}`;
+    };
+
     this.form = this.fb.group({
-      title: [data?.titile || '', Validators.required],
-      description: [data?.decription || '', Validators.required],
-      startDate: [data?.startDate || '', Validators.required],
-      endDate: [data?.endDate || '', Validators.required],
+      title: [data?.title || '', Validators.required],
+      description: [data?.description || '', Validators.required],
+      startDate: [brToIso(data?.start_time) || '', Validators.required],
+      endDate: [brToIso(data?.end_time) || '', Validators.required],
     });
   }
 
   save() {
     if (this.form.invalid) return;
 
-    this.dialogRef.close(this.form.value);
+    const result = {
+      ...this.form.value,
+      startDate: this.form.value.startDate,
+      endDate: this.form.value.endDate,
+    };
+
+    this.dialogRef.close(result);
   }
 
   cancel() {
