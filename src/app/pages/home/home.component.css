@@ -161,6 +161,11 @@
   color: #333;
 }
 
+.meeting-info .status {
+  margin: 0;
+  color: #333;
+}
+
 .meeting-actions {
   display: flex;
   gap: 8px;

@@ -15,6 +15,7 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-create-edit-meeting',
@@ -26,6 +27,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatSelectModule,
   ],
   templateUrl: './create-edit-meeting.component.html',
   styleUrl: './create-edit-meeting.component.css',
@@ -53,6 +55,7 @@ export class CreateEditMeetingComponent {
       description: [data?.description || '', Validators.required],
       startDate: [brToIso(data?.start_time) || '', Validators.required],
       endDate: [brToIso(data?.end_time) || '', Validators.required],
+      status: [data?.status || 'agendada', Validators.required],
     });
   }
 

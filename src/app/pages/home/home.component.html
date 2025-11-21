@@ -64,11 +64,14 @@
       >
         <div class="meeting-info">
           <h3>{{ meeting.title }}</h3>
+          <p class="desc">{{ meeting.description }}</p>
           <p class="meta">
             {{ meeting.startDate }} —
             {{ meeting.endDate }}
           </p>
-          <p class="desc">{{ meeting.description }}</p>
+          <p class="status">
+            {{ meeting.status }}
+          </p>
         </div>
 
         <div class="meeting-actions">
